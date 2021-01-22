@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 import pymongo
-from splinter import Browser
+from config import app_id, app_key
+from requests import get
+import json
 
 app = Flask('__name__')
 app.static_folder = 'static'
@@ -16,8 +18,8 @@ jobsColl = indeedDB["jobsColl"]
 def root_route():
     # Get User params
 
-    # Get jobs from page
-    result = scrape()
+    # Get jobs from api
+    result = getJobs()
 
     # Post jobs to DB
     # dataToDB(result)
@@ -28,53 +30,66 @@ def root_route():
     # Pass data to page
     return render_template('index.html', data=result)
 
-app.run(port = '5000', debug = True)
 
-def scrape():
-    # Setup splinter
-    executable_path = {'executable_path' : 'C:/chromedriver.exe'}
-    browser = Browser('chrome', **executable_path, headless = False)
 
+def getJobs():
     # Get parameters
-    what = 'data science'
-    where = 'Chicago, IL'
-    daysAgoPosted = 7
-    remoteCode = ''
-    jobType = ''
-    companyName = ''
-    companyId = ''
-    explvl = ''
+    page = 1
+    countryCode = 'gb'
+    queryType = 'search'
+    page = 1
+    loc0 = 'UK'
+    loc1 = 'London'
+    loc2 = ''
+    category='it-jobs'
 
     # Make url
-    url = f'https://www.indeed.com/jobs?q={what}&l={where}&fromage={daysAgoPosted}&remotejob={remoteCode}&jt={jobType}&rbc={companyName}&jcid={companyId}&explvl={explvl}'
-    print('url= ' + str(url))
+    url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?app_id={app_id}&app_key={app_key}&content-type=application/json'
+    #print('url= ' + str(url))
+    response = json.loads(get(url).text)['results']
+    parsedJobs = []
+    for job in response:
+        jobId = job.get('id')
+        title = job.get('title')
+        company = job.get('company').get('display_name')
+        createdAt = job.get('created')
+        category = job.get('category').get('label')
+        lat = job.get('latitude')
+        lng = job.get('longitude')
+        locationName = job.get('location').get('display_name')
+        locationAreaArr = job.get('location').get('area')
+        salaryIsPredicted = job.get('salary_is_predicted')
+        salaryMax = job.get('salary_max')
+        salaryMin = job.get('salary_min')
 
-    # Load page into browser
-    browser.visit(url)
+        parsedJob = {
+            'id': jobId,
+            'title': title,
+            'company': company,
+            'createdAt': createdAt,
+            'category': category,
+            'lat': lat,
+            'lng': lng,
+            'locationName': locationName,
+            'locationAreaArr': locationAreaArr,
+            'salaryIsPredicted': salaryIsPredicted,
+            'salaryMax': salaryMax,
+            'salaryMin': salaryMin,
+        }
+        parsedJobs.append(parsedJob)
+        
 
-    # Find tag for first news headline
-    if browser.is_element_present_by_css('td[id="resultsCol"]', wait_time=5):
-        cards = browser.find_by_css('div.jobsearch-SerpJobCard')
-        print('numJobs= ' + str(len(cards)))
-        scrape_results = []
-        for card in cards:
-            scrape_result = {}
-            title = card.find_by_css('h2.title a').text
-            sjcl = card.find_by_css('div.sjcl')
-            company = sjcl.find_by_css('span.company').text
-            location = sjcl.find_by_css('.location').text
-            summary = card.find_by_css('.summary').text
-            scrape_result.update({'title':title, 'company':company, 'location':location, 'summary': summary})
-            print('result= ' + str(scrape_result))
-            scrape_results.append(scrape_result)
-        return scrape_results
-    else:
-        print('Page timed out:' + url)
-        return False
+    print(parsedJobs)
+    return parsedJobs
+
+
     
-    # def dataToDB():
-    #     # Clear Collection
-    #     jobsColl.remove({})
-    #     jobsColl.insert(scrape_result)
+# def dataToDB():
+#     # Clear Collection
+#     jobsColl.remove({})
+#     jobsColl.insert(scrape_result)
 
-    # def dataFromDB():
+# def dataFromDB():
+
+
+app.run(port = '5000', debug = True)
