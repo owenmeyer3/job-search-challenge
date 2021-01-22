@@ -11,8 +11,8 @@ indeedDB = myclient["indeedDB"]
 # create collection in db
 jobsColl = indeedDB["jobsColl"]
 
-
-@app.route('/<company>/<position>/<location>/<summary>')
+#@app.route('/<company>/<position>/<location>/<summary>')
+@app.route('/')
 def root_route():
     # Get User params
 
@@ -20,10 +20,10 @@ def root_route():
     result = scrape()
 
     # Post jobs to DB
-    dataToDB(result)
+    # dataToDB(result)
 
     # Pull from DB
-    data = dataFromDB()
+    # data = dataFromDB()
 
     # Pass data to page
     return render_template('index.html', data=result)
@@ -72,9 +72,9 @@ def scrape():
         print('Page timed out:' + url)
         return False
     
-    def dataToDB():
-        # Clear Collection
-        jobsColl.remove({})
-        jobsColl.insert(scrape_result)
+    # def dataToDB():
+    #     # Clear Collection
+    #     jobsColl.remove({})
+    #     jobsColl.insert(scrape_result)
 
-    def dataFromDB():
+    # def dataFromDB():
