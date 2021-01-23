@@ -13,21 +13,30 @@
             <div class='row'>
                 <h1>Project-3</h1>
             </div>
+
+            <div id='UI' class='row'>
+                <form action="/action_page.php">
+                    <label for="jobType">Job Type</label>
+                    <input id='jobType' type="text" name="jobType"><br><br>
+                    <label for="location">Location</label>
+                    <input id='location' type="text" name="location"><br><br>
+                    <input type="submit" value="Submit">
+                  </form>
+            </div>
             
-            <div class='row'>
+            <div id='map' class='row'>
 
             </div>
-            <div class='row'>
+            <div id='top-companies' class='row'>
                 
             </div>
-            <div class='row'>
+            <div id='salaryGauge' class='row'>
                 
             </div>
             
         </div>
         <!-- Run js -->
         <script src="https://d3js.org/d3.v6.min.js"></script>
-        <!--<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>-->
         <script src='static/js/script.js' indata={{data|tojson}}></script>
     </body>
 </html>
