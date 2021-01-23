@@ -1,5 +1,10 @@
 var data = JSON.parse(document.currentScript.getAttribute("indata"));
+console.log('data')
 console.log(data)
+
+
+//d3.select('#jobType')
+
 
 d3.select('#map')
     .selectAll('div')

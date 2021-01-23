@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import pymongo
 from config import app_id, app_key
 from requests import get
@@ -14,39 +14,48 @@ indeedDB = myclient["indeedDB"]
 # create collection in db
 jobsColl = indeedDB["jobsColl"]
 
-#@app.route('/<company>/<position>/<location>/<summary>')
+#http://localhost:5000/?jobType=Data+Science&location=Chicago%2C+IL
+
 @app.route('/')
+#@app.route('/', methods=["GET"])
 def root_route():
     # Get User params
-    
+    if request.query_string:
+        thisRequest = request.query_string.decode("utf-8")
+        queriesSplit = thisRequest.split('&')
+        keyValDict = {}
+        for s in queriesSplit:
+            keyValPair = s.split('=')
+            key = keyValPair[0]
+            val = keyValPair[1]
+            keyValDict[key] = val
+        what = keyValDict['jobType']
+        where = keyValDict['location']
+        print(str(keyValDict))
+    else:
+        print('no queryString')
+        what=''
+        where=''
+
     # Get jobs from api
-    result = getJobs()
+    result = getJobs(what, where)
     
     # Post jobs to DB
     dataToDB(result)
 
     # Pull from DB
     result = dataFromDB()
-    print('type', type(result))
-    print(result)
     # Pass data to page
     return render_template('index.html', data=result)
 
-
-
-def getJobs():
+def getJobs(what, where):
     # Get parameters
     page = 1
     countryCode = 'us'
     queryType = 'search'
-    page = 1
-    loc0 = 'chicago'
-    loc1 = 'illinois'
-    loc2 = ''
-    category='it-jobs'
 
     # Make url
-    url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?app_id={app_id}&app_key={app_key}&content-type=application/json'
+    url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&app_id={app_id}&app_key={app_key}&content-type=application/json'
     #print('url= ' + str(url))
     response = json.loads(get(url).text)['results']
     parsedJobs = []
@@ -86,7 +95,8 @@ def getJobs():
 def dataToDB(data):
     # Clear Collection
     jobsColl.remove({})
-    jobsColl.insert(data)
+    if(data):
+        jobsColl.insert(data)
 
 def dataFromDB():
     cursor = jobsColl.find({}, {'_id':0})
