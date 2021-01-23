@@ -40,6 +40,8 @@ http://api.adzuna.com/v1/api/jobs/gb/top_companies
 
 Params and Query types
 https://developer.adzuna.com/activedocs/#!/adzuna/categories
+https://developer.adzuna.com/activedocs/#!/adzuna/search
+https://developer.adzuna.com/docs/historical
 
 Example result
 [{

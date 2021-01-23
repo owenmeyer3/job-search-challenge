@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Local CSS -->
-        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet"/>
+        <!-- Local CSS 
+        <link href='static/js/script.js' rel="stylesheet"/>-->
         <!-- BS CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <!-- BS JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     </head>
     <body>
-        <h1>Project-3</h1>
-        <p>{{data}}</p>
+        <div class='container'>
+            <div class='row'>
+                <h1>Project-3</h1>
+            </div>
+            
+            <div class='row'>
+
+            </div>
+            <div class='row'>
+                
+            </div>
+            <div class='row'>
+                
+            </div>
+            
+        </div>
+        <!-- Run js -->
         <script src="https://d3js.org/d3.v6.min.js"></script>
-        <script src='static/js/config.js'></script>
-        <script src='static/js/script.js'></script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>-->
+        <script src='static/js/script.js' indata={{data|tojson}}></script>
     </body>
 </html>
+

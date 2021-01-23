@@ -3,6 +3,7 @@ import pymongo
 from config import app_id, app_key
 from requests import get
 import json
+from pprint import pprint
 
 app = Flask('__name__')
 app.static_folder = 'static'
@@ -22,12 +23,14 @@ def root_route():
     result = getJobs()
 
     # Post jobs to DB
-    # dataToDB(result)
+    dataToDB(result)
 
     # Pull from DB
-    # data = dataFromDB()
+    result = str(dataFromDB())
 
     # Pass data to page
+    print('result')
+    print(result)
     return render_template('index.html', data=result)
 
 
@@ -78,18 +81,22 @@ def getJobs():
         }
         parsedJobs.append(parsedJob)
         
-
-    print(parsedJobs)
     return parsedJobs
 
 
     
-# def dataToDB():
-#     # Clear Collection
-#     jobsColl.remove({})
-#     jobsColl.insert(scrape_result)
+def dataToDB(data):
+    # Clear Collection
+    jobsColl.remove({})
+    jobsColl.insert(data)
 
-# def dataFromDB():
+def dataFromDB():
+    cursor = jobsColl.find({})
+    data = []
+    for record in cursor:
+        data.append(record)
+    return data
+
 
 
 app.run(port = '5000', debug = True)
