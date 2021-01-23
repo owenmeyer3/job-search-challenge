@@ -95,14 +95,7 @@ def getJobs():
             salaryMax,
             salaryMin,
         ]
-        parsedJobs.append(parsedJob)
-
-    with open('ADZResults.csv','w',newline='',encoding='utf-8') as output:
-        writer=csv.writer(output)
-        #writer.writerow(['Job_Title','Job_Company','Job_Location','Job_Salary'])
-        writer.writerows(parsedJobs)
-        
-        
+        parsedJobs.append(parsedJob)    
     return parsedJobs
 
 
