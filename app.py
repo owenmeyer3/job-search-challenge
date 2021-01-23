@@ -4,6 +4,7 @@ from config import app_id, app_key
 from requests import get
 import json
 from pprint import pprint
+import csv
 
 app = Flask('__name__')
 app.static_folder = 'static'
@@ -38,11 +39,11 @@ def root_route():
 def getJobs():
     # Get parameters
     page = 1
-    countryCode = 'gb'
+    countryCode = 'us'
     queryType = 'search'
     page = 1
-    loc0 = 'UK'
-    loc1 = 'London'
+    loc0 = 'chicago'
+    loc1 = 'illinois'
     loc2 = ''
     category='it-jobs'
 
@@ -79,7 +80,28 @@ def getJobs():
             'salaryMax': salaryMax,
             'salaryMin': salaryMin,
         }
+
+        parsedJob = [
+            jobId,
+            title,
+            company,
+            createdAt,
+            category,
+            lat,
+            lng,
+            locationName,
+            locationAreaArr,
+            salaryIsPredicted,
+            salaryMax,
+            salaryMin,
+        ]
         parsedJobs.append(parsedJob)
+
+    with open('ADZResults.csv','w',newline='',encoding='utf-8') as output:
+        writer=csv.writer(output)
+        #writer.writerow(['Job_Title','Job_Company','Job_Location','Job_Salary'])
+        writer.writerows(parsedJobs)
+        
         
     return parsedJobs
 

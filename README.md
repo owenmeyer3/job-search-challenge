@@ -73,6 +73,20 @@ Example result
     'adref': 'eyJhbGciOiJIUzI1NiJ9.eyJpIjoiMTk0NzY5MzAzNCIsInMiOiJwaFN2ZXVwYzZ4R2x1ZVprNFhIcktnIn0.qhixH4KuZN1_GJ6kW12h2o_0KBKeRFNso8KnFsjiNDQ'
 }]
 
+{'_id': ObjectId('600c52c72e8005b4ac7e77fc'), 
+    'id': '1949272729', 
+    'title': 'Amazon Warehouse Associate - Early Morning Shifts Available', 
+    'company': 'Amazon Workforce Staffing', 
+    'createdAt': '2021-01-22T02:26:23Z', 
+    'category': 'Logistics & Warehouse Jobs', 
+    'lat': 43.09816, 
+    'lng': -89.32431, 
+    'locationName': 'Monona, Dane County', 
+    'locationAreaArr': ['US', 'Wisconsin', 'Dane County', 'Monona'], 
+    'salaryIsPredicted': '0', 
+    'salaryMax': None, 
+'salaryMin': None}
+
 ## Indeed (crawl)
 * remote, remotejob=032b3046-06a3-4876-8dfd-474eb5e7ed11
 * remote for covid, remotejob=7e3167e4-ccb4-49cb-b761-9bae564a0a63
