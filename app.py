@@ -1,11 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import pymongo
 from config import app_id, app_key
 from requests import get
 import json
 from pprint import pprint
 import csv
-
 app = Flask('__name__')
 app.static_folder = 'static'
 # connect to db
@@ -19,19 +18,18 @@ jobsColl = indeedDB["jobsColl"]
 @app.route('/')
 def root_route():
     # Get User params
-
+    
     # Get jobs from api
     result = getJobs()
-
+    
     # Post jobs to DB
     dataToDB(result)
 
     # Pull from DB
-    result = str(dataFromDB())
-
-    # Pass data to page
-    print('result')
+    result = dataFromDB()
+    print('type', type(result))
     print(result)
+    # Pass data to page
     return render_template('index.html', data=result)
 
 
@@ -78,10 +76,9 @@ def getJobs():
             'locationAreaArr': locationAreaArr,
             'salaryIsPredicted': salaryIsPredicted,
             'salaryMax': salaryMax,
-            'salaryMin': salaryMin,
+            'salaryMin': salaryMin
         }
         parsedJobs.append(parsedJob)
-        print(parsedJobs)
     return parsedJobs
 
 
@@ -92,7 +89,7 @@ def dataToDB(data):
     jobsColl.insert(data)
 
 def dataFromDB():
-    cursor = jobsColl.find({})
+    cursor = jobsColl.find({}, {'_id':0})
     data = []
     for record in cursor:
         data.append(record)
