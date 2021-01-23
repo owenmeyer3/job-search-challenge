@@ -1,6 +1,6 @@
-// var rawData = document.currentScript.getAttribute("indata")
-// var decodeData = decodeURIComponent(JSON.parse('"'+rawData+'"'));
-// console.log(decodeData[0])
+var rawData = document.currentScript.getAttribute("indata")
+var decodeData = decodeURIComponent(JSON.parse('"'+rawData+'"'));
+console.log(decodeData)
 //var data = JSON.parse(JSON.parse('"'+decodeData+'"'))
 //console.log(data[0])
 

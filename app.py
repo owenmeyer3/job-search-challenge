@@ -80,22 +80,8 @@ def getJobs():
             'salaryMax': salaryMax,
             'salaryMin': salaryMin,
         }
-
-        parsedJob = [
-            jobId,
-            title,
-            company,
-            createdAt,
-            category,
-            lat,
-            lng,
-            locationName,
-            locationAreaArr,
-            salaryIsPredicted,
-            salaryMax,
-            salaryMin,
-        ]
-        parsedJobs.append(parsedJob)    
+        parsedJobs.append(parsedJob)
+        print(parsedJobs)
     return parsedJobs
 
 
