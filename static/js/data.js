@@ -1,11 +1,7 @@
+// Get data from html <script> object 'indata' param
 var data = JSON.parse(document.currentScript.getAttribute("indata"));
-console.log('data')
-console.log(data)
 
-
-//d3.select('#jobType')
-
-
+// Make table for each job returned
 d3.select('#map')
     .selectAll('div')
     .data(data).enter()

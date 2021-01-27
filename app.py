@@ -7,6 +7,7 @@ from pprint import pprint
 import csv
 app = Flask('__name__')
 app.static_folder = 'static'
+
 # connect to db
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 # create db
@@ -14,15 +15,18 @@ indeedDB = myclient["indeedDB"]
 # create collection in db
 jobsColl = indeedDB["jobsColl"]
 
+# Example query string
 #http://localhost:5000/?jobType=Data+Science&location=Chicago%2C+IL
 
 @app.route('/')
-#@app.route('/', methods=["GET"])
 def root_route():
     # Get User params
     if request.query_string:
+        # Get current url qury string
+        # https://docs.python.org/3/library/urllib.parse.html
         thisRequest = request.query_string.decode("utf-8")
         queriesSplit = thisRequest.split('&')
+        # Make dictionary of query keys and vals
         keyValDict = {}
         for s in queriesSplit:
             keyValPair = s.split('=')
@@ -31,12 +35,12 @@ def root_route():
             keyValDict[key] = val
         what = keyValDict['jobType']
         where = keyValDict['location']
-        print(str(keyValDict))
     else:
         print('no queryString')
-        what=''
-        where=''
-
+        what='Default What'
+        where='Default Where'
+    what = what.decode("utf-8")
+    where = what.decode("utf-8")
     # Get jobs from api
     result = getJobs(what, where)
     
@@ -45,8 +49,10 @@ def root_route():
 
     # Pull from DB
     result = dataFromDB()
+
     # Pass data to page
-    return render_template('index.html', data=result)
+    input = {'what' : what, 'where' : where, 'data' : result}
+    return render_template('index.html', input=input)
 
 def getJobs(what, where):
     # Get parameters
@@ -56,9 +62,9 @@ def getJobs(what, where):
 
     # Make url
     url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&app_id={app_id}&app_key={app_key}&content-type=application/json'
-    #print('url= ' + str(url))
     response = json.loads(get(url).text)['results']
     parsedJobs = []
+    #---------------------------why use .get()?
     for job in response:
         jobId = job.get('id')
         title = job.get('title')

@@ -17,9 +17,9 @@
             <div id='UI' class='row'>
                 <form action = "http://localhost:5000/" method = "get">
                     <label for="jobType">Job Type</label>
-                    <input id='jobType' type="text" name="jobType" value='Data Science'><br><br>
+                    <input id='jobType' type="text" name="jobType" value='{{input.what}}'><br><br>
                     <label for="location">Location</label>
-                    <input id='location' type="text" name="location" value='Chicago, IL'><br><br>
+                    <input id='location' type="text" name="location" value='{{input.where}}'><br><br>
                     <input type="submit" value="Submit">
                   </form>
             </div>
@@ -37,7 +37,7 @@
         </div>
         <!-- Run js -->
         <script src="https://d3js.org/d3.v6.min.js"></script>
-        <script src='static/js/data.js' indata='{{data|tojson|safe}}'></script>
+        <script src='static/js/data.js' indata='{{input.data|tojson|safe}}'></script>
         <script src='static/js/map.js'></script>
         <script src='static/js/topcompanies.js'></script>
         <script src='static/js/gauge.js'></script>
