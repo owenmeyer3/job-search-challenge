@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Local CSS 
-        <link href='static/js/script.js' rel="stylesheet"/>-->
+        <!-- Local CSS -->
+        <link href='static/css/style.css' rel="stylesheet"/>
         <!-- BS CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <!-- BS JavaScript Bundle with Popper -->
@@ -10,19 +10,31 @@
     </head>
     <body>
         <div class='container'>
-            <div class='row'>
-                <h1>Project-3</h1>
+            <!-- Header Row -->
+            <div id='headerRow' class='row text-center'>
+                <!-- Title -->
+                <h1 style='color:white'>Job Information</h1>
+                <!-- UI -->
+                <form action = "http://localhost:5000/" method = "get">
+                    <!-- text box row -->
+                    <div class='row'>
+                        <!-- Job type column -->
+                        <div class="col-6" style='text-align:center'>
+                            <label for="jobType" class="form-label" style='color:white'>Job Type</label>
+                            <input id='jobType' type="text" name="jobType" value='{{input.what}}' class="form-control"><br><br>
+                        </div>
+                        <!-- Job location column -->
+                        <div class="col-6" style='text-align:center'>
+                            <label for="location" class="form-label" style='color:white'>Location</label>
+                            <input id='location' type="text" name="location" value='{{input.where}}' class="form-control"><br><br>
+                        </div>
+                    </div>
+                    <!-- Job search button -->
+                    <input type="submit" class="btn btn-light" value="Search Jobs">
+                </form>
             </div>
 
-            <div id='UI' class='row'>
-                <form action = "http://localhost:5000/" method = "get">
-                    <label for="jobType">Job Type</label>
-                    <input id='jobType' type="text" name="jobType" value='{{input.what}}'><br><br>
-                    <label for="location">Location</label>
-                    <input id='location' type="text" name="location" value='{{input.where}}'><br><br>
-                    <input type="submit" value="Submit">
-                  </form>
-            </div>
+
 
             <div id='owen' class='row'>
 
