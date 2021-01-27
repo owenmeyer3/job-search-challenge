@@ -73,6 +73,7 @@ Example result
     'adref': 'eyJhbGciOiJIUzI1NiJ9.eyJpIjoiMTk0NzY5MzAzNCIsInMiOiJwaFN2ZXVwYzZ4R2x1ZVprNFhIcktnIn0.qhixH4KuZN1_GJ6kW12h2o_0KBKeRFNso8KnFsjiNDQ'
 }]
 
+Our parsed data
 {'_id': ObjectId('600c52c72e8005b4ac7e77fc'), 
     'id': '1949272729', 
     'title': 'Amazon Warehouse Associate - Early Morning Shifts Available', 
@@ -87,21 +88,22 @@ Example result
     'salaryMax': None, 
 'salaryMin': None}
 
-## Indeed (crawl)
-* remote, remotejob=032b3046-06a3-4876-8dfd-474eb5e7ed11
-* remote for covid, remotejob=7e3167e4-ccb4-49cb-b761-9bae564a0a63
-* what, searchString+$xx,000
-* jobTypes, fulltime, parttime, contract, temporary, intern, commission
-* rbc ex: Domino%27s
-* jcid ex: 788a7fd79eec1d60
-* explvl: entry_level, mid_level, senior_level
+to do:
+make multiple pages searchable
+simplify string passing js to python
 
-https://www.indeed.com/jobs
-    ?q=${what}
-    &l=${where}
-    &fromage=${daysAgoPosted}
-    &remotejob=${remoteCode}
-    &jt=${jobType}
-    &rbc=${companyName}
-    &jcid=${companyId}
-    &explvl=${explvl}
+//-------app.py
+//reload page (go to page)
+//grab parameters from text boxes
+//query with those parameters
+//gets jobs from query
+//jobs to DB, jobs from database
+//now we have jobs from db
+//render html at localhost (with textbox params and data)
+
+//-------file.js
+//select html tag with data [d3.select('#dataScript')]
+//get from tag .attr('indata)
+//make data json type [JSON.parse()]
+//make visualwithdata
+//append visual to div
