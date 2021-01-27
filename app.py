@@ -21,7 +21,7 @@ def root_route():
         where=request.args.get('location')
     else:
         print('no queryString')
-        what='String'
+        what='Salon'
         where='Chicago, IL'
 
     # Get jobs from api
