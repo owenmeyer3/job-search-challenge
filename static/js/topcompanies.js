@@ -1,0 +1,1 @@
+var data = JSON.parse(d3.select('#dataScript').attr('indata'));

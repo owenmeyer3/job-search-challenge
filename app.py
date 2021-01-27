@@ -5,6 +5,7 @@ from requests import get
 import json
 from pprint import pprint
 import csv
+from urllib.parse import urlparse, parse_qs
 app = Flask('__name__')
 app.static_folder = 'static'
 
@@ -26,6 +27,10 @@ def root_route():
         # https://docs.python.org/3/library/urllib.parse.html
         thisRequest = request.query_string.decode("utf-8")
         queriesSplit = thisRequest.split('&')
+        #parsed = urlparse(request.text['current_user_url'])
+        #print('parsed: ', parsed)
+        #qs = parse_qs(parsed)
+        #print('qs: ', qs)
         # Make dictionary of query keys and vals
         keyValDict = {}
         for s in queriesSplit:
@@ -37,10 +42,10 @@ def root_route():
         where = keyValDict['location']
     else:
         print('no queryString')
-        what='Default What'
-        where='Default Where'
-    what = what.decode("utf-8")
-    where = what.decode("utf-8")
+        what='Data Science'
+        where='Chicago, IL'
+    #what = what.decode("utf-8")
+    #where = what.decode("utf-8")
     # Get jobs from api
     result = getJobs(what, where)
     
