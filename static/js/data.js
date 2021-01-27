@@ -2,7 +2,7 @@
 var data = JSON.parse(document.currentScript.getAttribute("indata"));
 
 // Make table for each job returned
-d3.select('#map')
+d3.select('#owen')
     .selectAll('div')
     .data(data).enter()
     .append('div')
