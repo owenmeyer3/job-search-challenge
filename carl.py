@@ -1,6 +1,7 @@
 import datetime
+import time
 import csv
-from bs4 import BeautifulSoup
+import BeautifulSoup
 import requests
 import dateutil.parser as dateparser
 file='\Chicago-DS_AdzunaResults.csv'
@@ -8,10 +9,10 @@ header=['source','company','title','category','location','latitude','longitude',
 with open('.\output' + file, 'w', newline='') as handle:
         writer=csv.writer(handle, delimiter=',')
         writer.writerow(header)
-# app_id='86767575'
-# app_key='adc9c2040851b81df96181b91cfc65a1'
-app_id = '2ae8e9f7'
-app_key = '672a581c8ecccf03d3905935ded22d61'
+app_id='86767575'
+app_key='adc9c2040851b81df96181b91cfc65a1'
+# app_id = '2ae8e9f7'
+# app_key = '672a581c8ecccf03d3905935ded22d61'
 country='us'
 what='data science'
 where='chicago'
@@ -46,3 +47,4 @@ with open('.\output' + file,'a',newline='') as handle:
             except UnicodeEncodeError:
                 row = [item.encode('utf-8') if item and not isinstance(item, datetime.datetime) else item for item in row_values]
                 writer.writerow(row)
+        time.sleep(1)
