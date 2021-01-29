@@ -19,13 +19,15 @@ def root_route():
     if request.query_string:
         what=request.args.get('jobType')
         where=request.args.get('location')
+        distanceMiles=request.args.get('distanceMiles')
     else:
         print('no queryString')
         what='Salon'
         where='Chicago, IL'
+        distanceMiles=3
 
     # Get jobs from api
-    result = getJobs(what, where)
+    result = getJobs(what, where, distanceMiles)
     print('jobs returned: ', len(result))
     
     # Post jobs to DB
@@ -35,20 +37,23 @@ def root_route():
     result = dataFromDB()
 
     # Pass data to page
-    input = {'what' : what, 'where' : where, 'data' : result}
+    input = {'what' : what, 'where' : where, 'distanceMiles' : distanceMiles, 'data' : result}
     return render_template('index.html', input=input)
 
-def getJobs(what, where):
+def getJobs(what, where, distanceMiles):
+    print('DM: ', distanceMiles)
     # Get parameters
     page = 1
     countryCode = 'us'
     queryType = 'search'
+    distanceKM = distanceMiles * 1.61
+    print('DK: ', distanceKM)
 
     # Query each job page of search (if page does not exist, end query and move on)
     jobs = []
     while(page):
         try:
-            url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&app_id={app_id}&app_key={app_key}&content-type=application/json'
+            url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&distance={distanceKM}&app_id={app_id}&app_key={app_key}&content-type=application/json'
             response = json.loads(get(url).text)['results']
             if response:
                 jobs += response
