@@ -41,20 +41,20 @@ def root_route():
     return render_template('index.html', input=input)
 
 def getJobs(what, where, distanceMiles):
-    print('DM: ', distanceMiles)
     # Get parameters
     page = 1
     countryCode = 'us'
     queryType = 'search'
     distanceKM = distanceMiles * 1.61
-    print('DK: ', distanceKM)
 
     # Query each job page of search (if page does not exist, end query and move on)
     jobs = []
     while(page):
         try:
             url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&distance={distanceKM}&app_id={app_id}&app_key={app_key}&content-type=application/json'
+            print(url)
             response = json.loads(get(url).text)['results']
+            print(response)
             if response:
                 jobs += response
                 page += 1
