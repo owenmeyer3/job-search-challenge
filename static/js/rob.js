@@ -74,7 +74,7 @@ for (var i = 0; i < data.length; i++) {
 
 // Load in geojson data
 var geoData = "geojsonData/us-county-boundaries-IL.geojson";
-console.log(geoData.properties.namelsad);
+
 var geojson;
 /*
 // Grab data with d3
