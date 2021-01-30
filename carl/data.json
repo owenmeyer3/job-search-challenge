@@ -1,21 +1,21 @@
 [{
-        "Letter": "Company1",
-        "Freq": 20
+        "Company": "IQVIA",
+        "Freq": 92
     },
     {
-        "Letter": "Company2",
-        "Freq": 12
+        "Company": "IBM",
+        "Freq": 74
     },
     {
-        "Letter": "Company3",
+        "Company": "Deloitte",
+        "Freq": 62
+    },
+    {
+        "Company": "Oracle",
+        "Freq": 51
+    },
+    {
+        "Company": "Microsoft",
         "Freq": 47
-    },
-    {
-        "Letter": "Company4",
-        "Freq": 34
-    },
-    {
-        "Letter": "Company5",
-        "Freq": 54
     }
 ]
