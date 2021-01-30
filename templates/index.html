@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- Plotly -->
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <!-- Local CSS -->
         <link href='static/css/style.css' rel="stylesheet"/>
         <!-- BS CSS only -->
@@ -19,7 +17,7 @@
                 <!-- Title -->
                 <h1 style='color:white'>Job Information</h1>
                 <!-- UI -->
-                <form action = "http://localhost:5000/" method = "get">
+                <form action = "http://localhost:5000" method = "get">
                     <!-- text box row -->
                     <div class='row'>
                         <!-- Job type column -->
@@ -67,8 +65,8 @@
         <script id='dataScript' src='static/js/data.js' indata='{{input.data|tojson|safe}}'></script>
         <!-- API key -->
         <script type="text/javascript" src="static/js/config.js"></script>
-        <script src='static/js/rob.js'></script>
+        <!--<script src='static/js/rob.js'></script>
         <script src='static/js/michelle.js'></script>
-        <script src='static/js/carl.js'></script>
+        <script src='static/js/carl.js'></script>-->
     </body>
 </html>

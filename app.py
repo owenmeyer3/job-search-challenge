@@ -19,7 +19,7 @@ def root_route():
     if request.query_string:
         what=request.args.get('jobType')
         where=request.args.get('location')
-        distanceMiles=request.args.get('distanceMiles')
+        distanceMiles=int(request.args.get('distanceMiles'))
     else:
         print('no queryString')
         what='Salon'
