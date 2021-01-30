@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Widget</title>
+</head>
+
+<body>
+
+    <h1>JSONP</h1>
+
+    <div id="job"></div>
+
+    <script>
+        function foo(o) {
+            var div = document.getElementById("job");
+            if (o.results.length > 0) {
+                div.appendChild(document.createTextNode(o.results[0].title));
+                div.appendChild(document.createElement("p"));
+                div.appendChild(document.createTextNode(o.results[0].description));
+            } else {
+                div.appendChild(document.createTextNode("no jobs available :-("));
+            }
+
+            return;
+        }
+    </script>
+
+    <script src="http://api.adzuna.com/v1/api/jobs/de/search?callback=foo&what=sales" type="text/javascript"></script>
+</body>
+
+</html>

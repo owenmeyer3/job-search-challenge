@@ -6,7 +6,7 @@ import requests
 import dateutil.parser as dateparser
 file='\Chicago-DS_AdzunaResults.csv'
 header=['source','company','title','category','location','latitude','longitude','datePosted','link','description']
-with open('.\output' + file, 'w', newline='') as handle:
+with open('..\output' + file, 'w', newline='') as handle:
         writer=csv.writer(handle, delimiter=',')
         writer.writerow(header)
 app_id='86767575'
@@ -23,7 +23,7 @@ results=response.json()
 print(results)
 jobCount = results.get('count')
 print(jobCount)
-with open('.\output' + file,'a',newline='') as handle:
+with open('..\output' + file,'a',newline='') as handle:
     writer = csv.writer(handle, delimiter=',')
     for page in range(1,jobCount+1):
         response = requests.get(url.format(country,page,app_id, app_key, what, where,max_days_old))

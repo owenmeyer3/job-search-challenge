@@ -1,0 +1,21 @@
+[{
+        "Letter": "Company1",
+        "Freq": 20
+    },
+    {
+        "Letter": "Company2",
+        "Freq": 12
+    },
+    {
+        "Letter": "Company3",
+        "Freq": 47
+    },
+    {
+        "Letter": "Company4",
+        "Freq": 34
+    },
+    {
+        "Letter": "Company5",
+        "Freq": 54
+    }
+]
