@@ -16,7 +16,7 @@ app_key='adc9c2040851b81df96181b91cfc65a1'
 country='us'
 what='data science'
 where='chicago'
-max_days_old='1'
+max_days_old='30'
 url = 'https://api.adzuna.com/v1/api/jobs/{}/search/{}?app_id={}&app_key={}&what={}&where={}&max_days_old={}'
 response=requests.get(url.format(country,1,app_id, app_key,what,where,max_days_old))
 results=response.json()
