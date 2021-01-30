@@ -68,24 +68,25 @@ for (var i = 0; i < data.length; i++) {
   
   // Create a new marker at the appropriate coordinates and bind a popup to it then add the marker to the icons layer
   var newMarker = L.marker([data[i].lat, data[i].lng])
-    .bindPopup("Job Title: " + data[i].title + "<br> Company: " + data[i].company + "<br> Date Posted: "+ new Date(data[i].createdAt) + "<br> Category: "+ data[i].category)
+    .bindPopup("Job Title: " + data[i].title + "<br> Company: " + data[i].company + "<br> Date Posted: "+ new Date(data[i].createdAt) + "<br> Category: "+ data[i].category + "<br> Link: "+ data[i].redirect_url + "<br> Description: "+ data[i].description)
     .addTo(layers.icons);
 }; 
 
 // Load in geojson data
-var geoData = "geojsonData/us-county-boundaries-IL.geojson";
+var geoData = "/static/geojsonData/us-county-boundaries-IL.geojson";
 
 var geojson;
-/*
+
 // Grab data with d3
 d3.json(geoData, function(data) {
 
   // Create a new choropleth layer
-  geojson = L.choropleth(data, {
+  //geojson = L.choropleth(data, {
+  geojson = L.geoJson(data, {  
 
     // Define what  property in the features to use
-    valueProperty: "MHI2016",
-
+    valueProperty: "geoid",
+    
     // Set color scale
     scale: ["#ffffb2", "#b10026"],
 
@@ -103,11 +104,11 @@ d3.json(geoData, function(data) {
 
     // Binding a pop-up to each layer
     onEachFeature: function(feature, layer) {
-      layer.bindPopup("County: " + feature.properties.namelsad + ", " + feature.properties.stusab "<br> Number of Jobs: " + feature.properties.geoid);
+      layer.bindPopup("County: " + feature.properties.namelsad + ", " + feature.properties.stusab + "<br> Number of Jobs: " + feature.properties.geoid);
     }
   }).addTo(layers.choropleth);
-
-  // Set up the legend
+  
+  /*/ Set up the legend
   var legend = L.control({ position: "bottomright" });
   legend.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
@@ -116,7 +117,7 @@ d3.json(geoData, function(data) {
     var labels = [];
 
     // Add min & max
-    var legendInfo = "<h1>Median Income</h1>" +
+    var legendInfo = "<h1>Jobs Available</h1>" +
       "<div class=\"labels\">" +
         "<div class=\"min\">" + limits[0] + "</div>" +
         "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
@@ -134,5 +135,5 @@ d3.json(geoData, function(data) {
 
   // Adding legend to the map
   legend.addTo(layers.choropleth);
-
-});*/
+  */
+});
