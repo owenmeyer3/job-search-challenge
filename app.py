@@ -9,9 +9,9 @@ app.static_folder = 'static'
 # connect to db
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 # create db
-indeedDB = myclient["indeedDB"]
+adzunaDB = myclient["adzunaDB"]
 # create collection in db
-jobsColl = indeedDB["jobsColl"]
+jobsColl = adzunaDB["jobsColl"]
 
 @app.route('/')
 def root_route():
@@ -79,7 +79,9 @@ def getJobs(what, where, distanceMiles):
             'locationAreaArr': job.get('location').get('area'),
             'salaryIsPredicted': job.get('salary_is_predicted'),
             'salaryMax': job.get('salary_max'),
-            'salaryMin': job.get('salary_min')
+            'salaryMin': job.get('salary_min'),
+            'redirect_url': job.get('redirect_url'),
+            'description': job.get('description')
         }
         parsedJobs.append(parsedJob)
     # return list of parsed jobs
