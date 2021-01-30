@@ -66,7 +66,7 @@ L.control.layers(mapStyle, overlays, {
 // Loop through data
 for (var i = 0; i < data.length; i++) {  
   
-  // Create a new marker at the appropriate coordinates and bind a popup to it then add the marker to the icons layer
+  // Create a new marker at the appropriate coordinates and bind a popup to it
   var newMarker = L.marker([data[i].lat, data[i].lng])
     .bindPopup("Job Title: " + data[i].title + "<br> Company: " + data[i].company + "<br> Date Posted: "+ new Date(data[i].createdAt) + "<br> Category: "+ data[i].category)
     .addTo(layers.icons);
