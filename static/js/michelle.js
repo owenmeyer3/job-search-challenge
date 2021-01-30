@@ -20,7 +20,7 @@ uniqueCompanies.forEach(uniqueCompany=>{
 })
 
 var sortedCompanyCounts = companyCounts.sort((a, b) => d3.descending(a.count, b.count));
-var topSortedCompanyCounts = sortedCompanyCounts.slice(0,10);
+var topSortedCompanyCounts = sortedCompanyCounts.slice(0,5);
 
   var data = [{
     x: topSortedCompanyCounts.map(obj => obj.company),
