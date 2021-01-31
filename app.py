@@ -49,20 +49,20 @@ def getJobs(what, where, distanceMiles):
 
     # Query each job page of search (if page does not exist, end query and move on)
     jobs = []
-    while(page):
-        try:
-            url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&distance={distanceKM}&app_id={app_id}&app_key={app_key}&content-type=application/json'
-            print(url)
-            response = json.loads(get(url).text)['results']
-            print(response)
-            if response:
-                jobs += response
-                page += 1
-            else:
-                page = 0
-        except:
-            print('query failed')
-            page = 0
+    # while(page):
+    #     try:
+    #         url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&distance={distanceKM}&app_id={app_id}&app_key={app_key}&content-type=application/json'
+    #         print(url)
+    #         response = json.loads(get(url).text)['results']
+    #         print(response)
+    #         if response:
+    #             jobs += response
+    #             page += 1
+    #         else:
+    #             page = 0
+    #     except:
+    #         print('query failed')
+    #         page = 0
     
     # Parse each job
     parsedJobs = []

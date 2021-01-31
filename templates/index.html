@@ -44,12 +44,11 @@
             </div>
             <div class='row'>
                 <div class="col-6" style='text-align:center'>
-                    <div id='owen' class='row'></div>
+                    <div id='owen' style='padding:10px' class='row'></div>
                 </div>
                 <div class="col-6" style='text-align:center'>
-                    <div id='owen' class='row'></div>
-                    <div id='rob' class='row'></div>
-                    <div id='michelle' class='row'></div>
+                    <div id='rob' style='padding:10px' class='row'></div>
+                    <div id='michelle' style='padding:10px' class='row'></div>
                     <div id='carl' class='row'></div>
                 </div>
             </div>
@@ -59,9 +58,11 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <!-- Run js -->
         <script src="https://d3js.org/d3.v6.min.js"></script>
-        <script id='dataScript' src='static/js/data.js' indata='{{input.data|tojson|safe}}'></script>
         <!-- API key -->
         <script type="text/javascript" src="static/js/config.js"></script>
+        <script id='dataScript' src='static/js/data.js' indata='{{input.data|tojson|safe}}'></script>
+        
+        
         <script src='static/js/rob.js'></script>
         <script src='static/js/michelle.js'></script>
         <!--<script src='static/js/carl.js'></script>-->
