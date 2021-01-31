@@ -10,6 +10,8 @@ body {
 #rob {
   height: 600px;
   width:100%;
+  border-style: solid;
+  border-color:#8F5DB0 
 }
 
 body,

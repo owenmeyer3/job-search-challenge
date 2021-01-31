@@ -42,7 +42,8 @@ var topSortedCompanyCounts = sortedCompanyCounts.slice(0,5);
   var layout = {
     title: 'Job Postings by companies',
     width: '100%',
-    height: 600
+    height: 600,
+    yaxis: {rangemode: 'nonnegative', autorange: true}
   };
   
   Plotly.newPlot('michelle', data, layout);

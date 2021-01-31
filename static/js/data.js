@@ -1,8 +1,8 @@
 // Get data from html <script> object 'indata' param PERMANENT
-//var data = JSON.parse(document.currentScript.getAttribute("indata"));
+var data = JSON.parse(document.currentScript.getAttribute("indata"));
 
 // Get JSON local data TEMPORARY
-var data = d3.json("static/js/SampleData_Default.json").then(function(data){ 
+// var data = d3.json("static/js/SampleData_Default.json").then(function(data){ 
  
 // Fill table structure
 var myDiv = d3.select('#owen');
@@ -32,4 +32,4 @@ tbody.selectAll('tr')
 
 
 // Get JSON local data TEMPORARY
-});
+// });
