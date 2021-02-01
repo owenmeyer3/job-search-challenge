@@ -1,3 +1,5 @@
+data = JSON.parse(d3.select('#dataScript').attr('indata'));
+
 var chartTitle = 'Top 5 Job Titles';
 var topN = 5;
 generateChart();
@@ -27,7 +29,7 @@ function generateChart() {
     // define axis
     xAxis = d3.svg.axis()
         .scale(x)
-        .orient('bottom')
+        .orient('bottom');
     yAxis = d3.svg.axis()
         .scale(y)
         .orient('left')
@@ -40,77 +42,79 @@ function generateChart() {
         .attr('transform',
             `translate(${margin.left},${margin.top})`);
 
-    // load data
-    d3.json('static/js/SampleData_Default.json', function(error, data) {
+    // for stored json data
+    // d3.json('static/js/SampleData_Default.json', function(error, data) {
 
-        // identify unique titles
-        titles = (data.map(obj => obj.title.replace('<strong>', '')));
-        uniqueTitles = [...new Set(titles)];
-        titlelist = [];
+    // identify unique titles
+    titles = (data.map(obj => obj.title.replace('<strong>', '')));
+    uniqueTitles = [...new Set(titles)];
+    titlelist = [];
 
-        data.forEach(function(d) {
-            titlelist.push(_.pick(d, ['title']));
-        });
-
-        // identify counts of unique titles
-        titleCounts = []
-        uniqueTitles.forEach(function(uniq, index) {
-            count = 0
-            titlelist.forEach(t => {
-                if (uniq === t.title) {
-                    count += 1
-                }
-            })
-            titleCounts.push({ 'title': uniq, 'Freq': count })
-        });
-
-        // sort and select chosen Top-N
-        titleCounts = titleCounts.sort((a, b) => d3.descending(a.Freq, b.Freq));
-        titleCounts = titleCounts.slice(0, topN);
-
-        // scale range
-        x.domain(titleCounts.map(function(d) {
-            return d.title;
-        }));
-        y.domain([0, d3.max(titleCounts, function(d) {
-            return d.Freq;
-        })]);
-
-        // set axis
-        svg.append('g')
-            .attr('class', 'x axis')
-            .attr('transform', 'translate(0,' + height + ')')
-            .call(xAxis)
-            .selectAll('text')
-            .style('text-anchor', 'center')
-            .attr('dx', '1em')
-            .attr('dy', '1em')
-            .attr('transform', 'rotate(0)');
-
-        svg.append('g')
-            .attr('class', 'y axis')
-            .call(yAxis)
-            .append('text')
-            .attr('x', 200)
-            .attr('y', -45)
-            .attr('dy', '1em')
-            .text(chartTitle)
-            .style('font-size', '15pt');
-
-        // Add bar chart
-        svg.selectAll('bar')
-            .data(titleCounts)
-            .enter().append('rect')
-            .attr('class', 'bar')
-            .attr('x', function(d) {
-                return x(d.title);
-            })
-            .attr('width', x.rangeBand())
-            .attr('y', function(d) {
-                return y(d.Freq);
-            })
-            .attr('height', function(d) {
-                return height - y(d.Freq);
-            })
+    data.forEach(function(d) {
+        titlelist.push(_.pick(d, ['title']));
     });
+
+    // identify counts of unique titles
+    titleCounts = []
+    uniqueTitles.forEach(function(uniq, index) {
+        count = 0
+        titlelist.forEach(t => {
+            if (uniq === t.title) {
+                count += 1
+            }
+        })
+        titleCounts.push({ 'title': uniq, 'Freq': count })
+    });
+
+    // sort and select chosen Top-N
+    titleCounts = titleCounts.sort((a, b) => d3.descending(a.Freq, b.Freq));
+    titleCounts = titleCounts.slice(0, topN);
+
+    // scale range
+    x.domain(titleCounts.map(function(d) {
+        return d.title;
+    }));
+    y.domain([0, d3.max(titleCounts, function(d) {
+        return d.Freq;
+    })]);
+
+    // set axis
+    svg.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(xAxis)
+        .selectAll('text')
+        .style('text-anchor', 'middle')
+        .style('font-size', '10pt')
+        .attr('dx', '1em')
+        .attr('dy', '1em')
+        .attr('transform', 'rotate(12)');
+
+    svg.append('g')
+        .attr('class', 'y axis')
+        .call(yAxis)
+        .append('text')
+        .attr('x', 200)
+        .attr('y', -45)
+        .attr('dy', '1em')
+        .text(chartTitle)
+        .style('font-size', '15pt');
+
+    // Add bar chart
+    svg.selectAll('bar')
+        .data(titleCounts)
+        .enter().append('rect')
+        .attr('class', 'bar')
+        .attr('x', function(d) {
+            return x(d.title);
+        })
+        .attr('width', x.rangeBand())
+        .attr('y', function(d) {
+            return y(d.Freq);
+        })
+        .attr('height', function(d) {
+            return height - y(d.Freq);
+        })
+        //});
+
 }

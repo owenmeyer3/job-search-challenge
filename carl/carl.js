@@ -1,78 +1,112 @@
-// Top Companies: https://api.adzuna.com/v1/api/jobs/us/top_companies?app_id=86767575&app_key=adc9c2040851b81df96181b91cfc65a1&what=Data%20Science&location0=Chicago
-// Categories:  http://api.adzuna.com/v1/api/jobs/gb/categories?app_id={YOUR API ID}&app_key={YOUR API KEY}&&content-type=application/json
-// Salary: http://api.adzuna.com/v1/api/jobs/gb/history?app_id={YOUR API ID}&app_key={YOUR API KEY}&location0=UK&location1=London&category=it-jobs&content-type=application/json
-// data = JSON.parse(d3.select('#dataScript').attr('indata'));
+data = JSON.parse(d3.select('#dataScript').attr('indata'));
 
-margin = {
-        top: 40,
-        right: 20,
-        bottom: 70,
-        left: 40
-    },
-    width = 800 - margin.left - margin.right,
-    height = 350 - margin.top - margin.bottom;
-// set the ranges
-x = d3.scale.ordinal().rangeRoundBands([0, width], .2);
-y = d3.scale.linear().range([height, 5]);
+var chartTitle = 'Top 5 Job Titles';
+var topN = 5;
+generateChart();
 
-// define the axis
-xAxis = d3.svg.axis()
-    .scale(x)
-    .orient('bottom')
-yAxis = d3.svg.axis()
-    .scale(y)
-    .orient('left')
-    .ticks(6);
-// add the SVG element
-svg = d3.select('body').append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
-    .append('g')
-    .attr('transform',
-        `translate(${margin.left},${margin.top})`);
+// top-N select
+function onSelect() {
+    topN = document.getElementById('topN').value;
+    chartTitle = 'Top ' + topN + ' Job Titles';
+    d3.select('#chart').select('svg').remove();
+    generateChart();
+}
+// set margins
+function generateChart() {
+    margin = {
+            top: 40,
+            right: 20,
+            bottom: 70,
+            left: 40
+        },
+        width = 600 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
 
-// load the data
-d3.json('data.json', function(error, data) {
+    // set the ranges
+    x = d3.scale.ordinal().rangeRoundBands([0, width], .2);
+    y = d3.scale.linear().range([height, 5]);
+
+    // define axis
+    xAxis = d3.svg.axis()
+        .scale(x)
+        .orient('bottom');
+    yAxis = d3.svg.axis()
+        .scale(y)
+        .orient('left')
+        .ticks(6);
+    // add SVG element
+    svg = d3.select('#chart').append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform',
+            `translate(${margin.left},${margin.top})`);
+
+    // for stored json data
+    // d3.json('static/js/SampleData_Default.json', function(error, data) {
+
+    // identify unique titles
+    titles = (data.map(obj => obj.title.replace('<strong>', '')));
+    uniqueTitles = [...new Set(titles)];
+    titlelist = [];
 
     data.forEach(function(d) {
-        d.Company = d.Company;
-        d.Freq = +d.Freq;
+        titlelist.push(_.pick(d, ['title']));
     });
 
-    // scale the range of the data
-    x.domain(data.map(function(d) {
-        return d.Company;
+    // identify counts of unique titles
+    titleCounts = []
+    uniqueTitles.forEach(function(uniq, index) {
+        count = 0
+        titlelist.forEach(t => {
+            if (uniq === t.title) {
+                count += 1
+            }
+        })
+        titleCounts.push({ 'title': uniq, 'Freq': count })
+    });
+
+    // sort and select chosen Top-N
+    titleCounts = titleCounts.sort((a, b) => d3.descending(a.Freq, b.Freq));
+    titleCounts = titleCounts.slice(0, topN);
+
+    // scale range
+    x.domain(titleCounts.map(function(d) {
+        return d.title;
     }));
-    y.domain([0, d3.max(data, function(d) {
+    y.domain([0, d3.max(titleCounts, function(d) {
         return d.Freq;
     })]);
 
-    // add axis
+    // set axis
     svg.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + height + ')')
         .call(xAxis)
         .selectAll('text')
-        .style('text-anchor', 'center')
-        .attr('dx', '0em')
+        .style('text-anchor', 'middle')
+        .style('font-size', '10pt')
+        .attr('dx', '1em')
         .attr('dy', '1em')
-        .attr('transform', 'rotate(0)');
+        .attr('transform', 'rotate(12)');
 
     svg.append('g')
         .attr('class', 'y axis')
         .call(yAxis)
         .append('text')
-        .attr('y', -25)
+        .attr('x', 200)
+        .attr('y', -45)
         .attr('dy', '1em')
-        .text('Top 5 Hiring Companies');
+        .text(chartTitle)
+        .style('font-size', '15pt');
 
     // Add bar chart
     svg.selectAll('bar')
-        .data(data)
+        .data(titleCounts)
         .enter().append('rect')
         .attr('class', 'bar')
         .attr('x', function(d) {
-            return x(d.Company);
+            return x(d.title);
         })
         .attr('width', x.rangeBand())
         .attr('y', function(d) {
@@ -81,4 +115,6 @@ d3.json('data.json', function(error, data) {
         .attr('height', function(d) {
             return height - y(d.Freq);
         })
-})
+        //});
+
+}
