@@ -15,7 +15,7 @@ jobsColl = adzunaDB["jobsColl"]
 
 @app.route('/')
 def root_route():
-    # Get User params
+    # Get User params (Otherwise fill with default)
     if request.query_string:
         what=request.args.get('jobType')
         where=request.args.get('location')
@@ -42,13 +42,13 @@ def root_route():
 
 def getJobs(what, where, distanceMiles):
     # Get parameters
-    page = 1
     countryCode = 'us'
     queryType = 'search'
     distanceKM = distanceMiles * 1.61
 
     # Query each job page of search (if page does not exist, end query and move on)
     jobs = []
+    page = 1
     while(page):
         try:
             url = f'http://api.adzuna.com/v1/api/jobs/{countryCode}/{queryType}/{page}?what={what}&where={where}&distance={distanceKM}&app_id={app_id}&app_key={app_key}&content-type=application/json'
@@ -90,11 +90,14 @@ def getJobs(what, where, distanceMiles):
 def dataToDB(data):
     # Clear Collection
     jobsColl.remove({})
+    # Insert job data to jobs collection
     if(data):
         jobsColl.insert(data)
 
 def dataFromDB():
+    # Get cursor object to collection
     cursor = jobsColl.find({}, {'_id':0})
+    # Make json type data from cursor
     data = []
     for record in cursor:
         data.append(record)

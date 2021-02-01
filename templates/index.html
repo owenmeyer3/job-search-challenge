@@ -35,51 +35,76 @@
                     <div class="col-6" style='text-align:center'>
                         <label for="location" class="form-label" style='color:white'>Location</label>
                         <input id='location' type="text" name="location" value='{{input.where}}' class="form-control"><br><br>
-                    </div>
-                    <!-- Job Miles column -->
-                    <div class="col-6" style='text-align:center'>
-                        <label for="distanceMiles" class="form-label" style='color:white'>Distance (Miles)</label>
-                        <input id='distanceMiles' type="text" name="distanceMiles" value='{{input.distanceMiles}}' class="form-control"><br><br>
-                    </div>
-                </div>
-                <!-- Job search button -->
-                <input type="submit" class="btn btn-light" value="Search Jobs">
-            </form>
-        </div>
-        <div class='row'>
-            <div class="col-6" style='text-align:center'>
-                <div id='owen' style='margin:10px' class='row'></div>
-            </div>
-            <div class="col-6" style='text-align:center'>
-                <div id='rob' style='margin:10px' class='row'></div>
-                <div id='michelle' style='margin:10px' class='row'></div>
-                <div id='carl' style='margin:10px' class='row'>
-                    Top N : &nbsp;
-                    <select id="topN" onchange="onSelect()">
-                        <option>5</option>
-                        <option>10</option>
-                    </select>
-                    <div id="chart" style="text-align:center">
-                    </div>
-                </div>
-                <img src="https://dm2305files.storage.live.com/y4mQ52Y1KD30uD97TCazkPMQ3-43Fl1_hK43oxKSP-ZFOOV1kOMcV3iBIHv-LzpjdCL5-mYJV9sMfaxBDvNlgLyHj37yULTSDkEpMjPBE89v-U5O9lG_GAOWNeDUXwIiWFJTfFEh66M8J0RtiExwuaC2mJrK2Z2f0hb10F_RvzqP58bR3-7DlFGVPdPo0tvX7D8?width=396&height=343&cropmode=none"
-                    width="396" height="343" />
-            </div>
-        </div>
-    </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    <!-- Run js -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js'></script>
-    <script src="https://d3js.org/d3.v3.min.js"></script>
-    <!-- API key -->
-    <script type="text/javascript" src="static/js/config.js"></script>
-    <script id='dataScript' src='static/js/data.js' indata='{{input.data|tojson|safe}}'></script>
+                        <head>
+                            <!-- Local CSS -->
+                            <link href='static/css/style.css' rel="stylesheet" />
+                            <!-- BS CSS only -->
+                            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+                            <!-- BS JavaScript Bundle with Popper -->
+                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+                            <!-- Leaflet CSS -->
+                            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+                            <!-- Plotly -->
+                            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                        </head>
 
-    <script src='static/js/rob.js'></script>
-    <script src='static/js/michelle.js'></script>
-    <script src='static/js/carl.js'></script>
-</body>
+                        <body>
+                            <div class='container'>
+                                <!-- Header Row -->
+                                <div id='headerRow' class='row text-center'>
+                                    <!-- Title -->
+                                    <h1 style='color:white'>Job Information</h1>
+                                    <!-- UI -->
+                                    <form action="http://localhost:5000" method="get">
+                                        <!-- text box row -->
+                                        <div class='row'>
+                                            <!-- Job type column -->
+                                            <div class="col-6" style='text-align:center'>
+                                                <label for="jobType" class="form-label" style='color:white'>Job Type</label>
+                                                <input id='jobType' type="text" name="jobType" value='{{input.what}}' class="form-control"><br><br>
+                                            </div>
+                                            <!-- Job location column -->
+                                            <div class="col-6" style='text-align:center'>
+                                                <label for="location" class="form-label" style='color:white'>Location</label>
+                                                <input id='location' type="text" name="location" value='{{input.where}}' class="form-control"><br><br>
+                                            </div>
+                                            <!-- Job Miles column -->
+                                            <div class="col-6" style='text-align:center'>
+                                                <label for="distanceMiles" class="form-label" style='color:white'>Distance (Miles)</label>
+                                                <input id='distanceMiles' type="text" name="distanceMiles" value='{{input.distanceMiles}}' class="form-control"><br><br>
+                                            </div>
+                                        </div>
+                                        <!-- Job search button -->
+                                        <input type="submit" class="btn btn-light" value="Search Jobs">
+                                    </form>
+                                </div>
+                                <div class='row'>
+                                    <div class="col-6" style='text-align:center'>
+                                        <div id='owen' style='margin:10px' class='row'></div>
+                                    </div>
+                                    <div class="col-6" style='text-align:center'>
+                                        <div id='rob' style='margin:10px' class='row'></div>
+                                        <div id='michelle' style='margin:10px' class='row'></div>
+                                        <div id='carl' class='row'></div>
+                                    </div>
+                                    <img src="https://dm2305files.storage.live.com/y4mQ52Y1KD30uD97TCazkPMQ3-43Fl1_hK43oxKSP-ZFOOV1kOMcV3iBIHv-LzpjdCL5-mYJV9sMfaxBDvNlgLyHj37yULTSDkEpMjPBE89v-U5O9lG_GAOWNeDUXwIiWFJTfFEh66M8J0RtiExwuaC2mJrK2Z2f0hb10F_RvzqP58bR3-7DlFGVPdPo0tvX7D8?width=396&height=343&cropmode=none"
+                                        width="396" height="343" />
+                                </div>
+                            </div>
+
+                            <!-- Leaflet  -->
+                            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+                            <!-- d3 -->
+                            <script src="https://d3js.org/d3.v6.min.js"></script>
+                            <!-- API key -->
+                            <script type="text/javascript" src="static/js/config.js"></script>
+
+                            <!-- Local js -->
+                            <script id='dataScript' src='static/js/data.js' indata='{{input.data|tojson|safe}}'></script>
+                            <script src='static/js/rob.js'></script>
+                            <script src='static/js/michelle.js'></script>
+                            <!--<script src='static/js/carl.js'></script>-->
+                        </body>
 
 </html>
