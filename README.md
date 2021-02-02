@@ -25,9 +25,7 @@ The job table is constructed with the company and job type data from the Adzuna 
 
 #### Job Map
 xxx
-
 #### Company Bar Chart
-xxx
-
+The Job Posting or Company Bar Chart was created using Plotly.  We wanted to answer, what are the companies that have the most job postings by job type, in the example in the ppt we looked at Data Science as a Job Type.  You can see that Microsoft Corporation and IBM have the most job postings for this Job Type.  Since I worked a IBM before, maybe it's because they have a high turnover rate or is it that they just have a need for that many new people because they are growing.  More questions to ponder. 
 #### Carl's Visual
 xxx
