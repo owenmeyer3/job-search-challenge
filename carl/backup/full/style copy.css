@@ -1,0 +1,77 @@
+#headerRow {
+    background-color: #8f5db0;
+    padding: 10px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#rob {
+    height: 600px;
+    width: 100%;
+    border-style: solid;
+    border-color: #8F5DB0
+}
+
+#carl {
+    width: 100%;
+}
+
+#carl #topN {
+    width: 100px;
+    height: 25px;
+}
+
+.bar {
+    fill: steelblue;
+}
+
+.bar:hover {
+    fill: lightblue;
+}
+
+.axis {
+    font: 15px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+label {
+    font-size: 15pt;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: #8F5DB0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.legend {
+    background-color: “black”;
+    line-height: 25px;
+    color: #555;
+    width: auto;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
