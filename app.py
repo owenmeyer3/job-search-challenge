@@ -28,7 +28,6 @@ def root_route():
 
     # Get jobs from api
     result = getJobs(what, where, distanceMiles)
-    print('jobs returned: ', len(result))
     
     # Post jobs to DB
     dataToDB(result)
