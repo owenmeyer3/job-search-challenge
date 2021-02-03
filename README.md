@@ -6,6 +6,12 @@
     <em>Display Output of Interactive Job Search Dashboard</em>
 </p> 
 
+<p>
+    <img src="https://github.com/owenmeyer3/project-3/blob/main/output/Picture1.png"/>
+    <br>
+    <em>Project Team</em>
+</p> 
+
 ## Overview
 This project presents a Flask web page that displays jobs and visualizations based on a user search. The Flask application is used to pass data to and from a Mongo database. The job data comes from the Adzuna API.
 
@@ -24,6 +30,12 @@ The app uses pyMongo to push job data to a Mongo database. The app then pulls da
 
 #### Flask app to HTML Data Transfer
 The Flask app passes the job data to the webpage with the render_template() function. The data is stored as an attribute in a script tag.
+
+<p>
+    <img src="https://github.com/owenmeyer3/project-3/blob/main/output/Picture5.png"/>
+    <br>
+    <em>Flask App Data Import</em>
+</p> 
 
 ## Javascript
 #### Job Table
