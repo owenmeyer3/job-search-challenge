@@ -41,4 +41,5 @@ The Job Posting or Company Bar Chart was created using Plotly.  We wanted to ans
 
 #### Interactive Top-N Chart
 ![Carl's Chart Pic](https://github.com/owenmeyer3/project-3/blob/main/output/CarlChart.png)
+
 The bottom right "Top 5 Job Titles" histogram described the distribution of the top job titles based on the users search output. Within the upper-left of report is a user selectable number of top titles, 5 or 10.  On user mouseover of a bar the user will see change in fill-color and a pop-up, from Tip library of both the selected category and the frequency count of that top title.  
