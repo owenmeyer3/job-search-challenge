@@ -37,7 +37,7 @@ The map tool was created using leaflet and mapbox. The objective is to show wher
 2. The second layer uses leaflet to create markers for each job posting based on latitude and longitude data in the job positing. The markers are given additional functionality to display a pop-up of job title company location and description. The pop-up also includes a link which opens the job application in a new window. 
 
 <p>
-    <img src="https://github.com/owenmeyer3/project-3/blob/main/output/Display%20Output.png"/>
+    <img src="https://github.com/owenmeyer3/project-3/blob/main/output/Picture6.png"/>
     <br>
     <em>JavaScript Creting Map Interface Controllers</em>
 </p> 
