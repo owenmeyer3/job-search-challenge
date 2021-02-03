@@ -50,6 +50,11 @@ The Job Posting or Company Bar Chart was created using Plotly.  We wanted to ans
 
 The bottom right "Top 5 Job Titles" histogram described the distribution of the top job titles based on the users search output. Within the upper-left of report is a user selectable number of top titles, 5 or 10.   On user-mouseover of a hovered-bar, the user will see change in fill-color (blue to light-blue) and a pop-up above bar displaying both the selected job title name and its frequency count.  Bar charts was built using D3/SVG and leveraging D3-Tip for mouseover and Lodash library to "Pick" Title attributes from array of JSON objects and build(Push) new array with its frequency count.
 
+<p>
+    <img src="https://github.com/owenmeyer3/project-3/blob/main/output/Picture8.png"/>
+    <img src="https://github.com/owenmeyer3/project-3/blob/main/output/Picture9.png"/>
+</p>
+
 ***
 
 <p>
